@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include("./includes/header.php"); ?>
@@ -200,14 +201,14 @@
                         <label class="control-label">
                              <input type="checkbox">
 
-                             I agree with the <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
+                             I agree with the <a href="terms.php" target="_blank">Terms &amp; Conditions</a>
                         </label>
                    </div>
 
                    <div class="clearfix">
                         <button type="button" class="filled-button pull-left">Back</button>
                         
-                        <button type="submit" class="filled-button pull-right">Finish</button>
+                        <button type="submit" class="filled-button pull-right" onclick="checkout()">Finish</button>
                    </div>
               </form>
           </div>
@@ -293,7 +294,15 @@
       </div>
     </div>
 <?php include("./includes/footerscripts.php");?>
-
+<script>
+     function checkout(){
+          Swal.fire(
+  'order placed',
+  'Click to continue',
+  'success'
+)
+     }
+</script>
   </body>
 
 </html>

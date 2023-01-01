@@ -1,8 +1,30 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
-
+<?php require_once("config.php");?>
  <?php include("./includes/header.php"); ?>
 
+
+ <?php 
+ $id = $_GET['id'];
+
+ $sql = "SELECT * FROM products WHERE id='$id' ";
+ if($result = mysqli_query($conn,$sql)){
+  if(mysqli_num_rows($result)>0){
+    $row=mysqli_fetch_array($result);
+      $image = $row['image_url'];
+      $product = $row['product_name'];
+      $price = $row['price'];
+      $dprice = $row['discounted_price'];
+      $description= $row['description'];
+      mysqli_free_result($result);
+  }else{
+    echo "unable to fetch results";
+  }
+}else{
+  echo "fail";
+}
+ ?>
   <body>
 
     <?php include("./includes/navbar.php");?>
@@ -26,7 +48,7 @@
         <div class="row">
           <div class="col-md-4 col-xs-12">
             <div>
-              <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid wc-image">
+              <img src="<?php echo $image;?>" alt="" class="img-fluid wc-image">
             </div>
             <br>
             <div class="row">
@@ -53,18 +75,18 @@
 
           <div class="col-md-8 col-xs-12">
             <form action="#" method="post" class="form">
-              <h2>Lorem ipsum dolor sit amet.</h2>
+              <h2><?php echo $product;?></h2>
 
               <br>
 
               <p class="lead">
-                <small><del> $999.00</del></small><strong class="text-primary">$779.00</strong>
+                <small><del> $<?php echo $price;?></del></small><strong class="text-primary">$<?php echo $dprice;?></strong>
               </p>
 
               <br>
 
               <p class="lead">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ratione molestias maxime odio. Provident ratione vero, corrupti, optio laborum aut!
+               <?php echo $description;?>
               </p>
 
               <br> 
@@ -108,14 +130,14 @@
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Similar Products</h2>
-              <a href="products.html">view more <i class="fa fa-angle-right"></i></a>
+              <a href="products.php">view more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Omega bicycle</h4></a>
+                <a href="product-details.php"><h4>Omega bicycle</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
               </div>
             </div>
@@ -123,9 +145,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Nike Revolution 5 Shoes</h4></a>
+                <a href="product-details.php"><h4>Nike Revolution 5 Shoes</h4></a>
                 <h6><small><del>$99.00</del></small>  $79.00</h6>
               </div>
             </div>
@@ -133,9 +155,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Treadmill Orion Sprint</h4></a>
+                <a href="product-details.php"><h4>Treadmill Orion Sprint</h4></a>
                 <h6><small><del>$1999.00</del></small>   $1779.00</h6>
               </div>
             </div>

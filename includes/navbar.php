@@ -1,3 +1,27 @@
+<?php 
+require_once("config.php");
+if(!empty($_SESSION["id"])){
+  $uid = $_SESSION["id"] ;
+  if($uid > 0){
+    $loginlink = "logout.php";
+    $login = "logout";
+    $sql = "SELECT username from users WHERE id= $uid";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+  $name = $row['username'];
+  }
+} else {
+  echo "0 results";
+}
+// $conn->close();
+  }
+}else{
+  $loginlink = "login.php";
+  $login = "login";
+}
+?>
+
 <!-- ***** Preloader Start ***** -->
 <div id="preloader">
         <div class="jumper">
@@ -40,8 +64,15 @@
                 <li class="nav-item"><a class="nav-link" href="checkout.php">Checkout</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="product-upload.php">Uplaod Product</a></li>
+
+                
+
+                <li class="nav-item"><a class="nav-link" href="<?php echo $loginlink;?>"><?php echo $login;?></a></li>
             </ul>
           </div>
         </div>
+        <h3 class="mr-3 text-white"><?php echo isset($name) ;?></h3>
       </nav>
     </header>

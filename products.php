@@ -1,8 +1,8 @@
+<?php session_start();?>
+<?php require_once("config.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include("./includes/header.php"); ?>
-  
-
   <body>
 <?php include("./includes/navbar.php");?>
   
@@ -20,75 +20,41 @@
         </div>
       </div>
     </div>
-
     <div class="products">
       <div class="container">
         <div class="row">
+    <?php 
+$sql = "SELECT * FROM products";
+if($result = mysqli_query($conn,$sql)){
+  if(mysqli_num_rows($result)>0){
+    $i=1;while($row=mysqli_fetch_assoc($result)){
+      ?>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="<?php echo $row['image_url'];?>" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
+                <a href="product-details.php?id=<?php echo $row['id'];?>"><h4><?php echo $row['product_name'];?></h4></a>
+                <h6><small><del>$<?php echo $row['price'];?> </del></small> $<?php echo $row['discounted_price'];?></h6>
+                <p><?php echo $row['description'];?></p>
               </div>
             </div>
           </div>
+          <?php $i++;
+          // mysqli_free_result($result);
+    }
+  }else{
+    echo "failed";
+  }
+}else{
+  echo "fail";
+}
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$99.00</del></small>  $79.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$1999.00</del></small>   $1779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>
-              </div>
-            </div>
-          </div>
+?>
+        </div>
+      </div>
+    </div>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-5-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$99.00</del></small>  $79.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-6-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$1999.00</del></small>   $1779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>
-              </div>
-            </div>
-          </div>
 
           <div class="col-md-12">
             <ul class="pages">
