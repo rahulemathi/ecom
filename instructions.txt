@@ -1,0 +1,5 @@
+1. import the sql file
+
+2. the default username and password is root and blank password
+
+3. login credentials username and password is rahul and 123456
